@@ -68,7 +68,9 @@ Route::post('/signin', [UserController::class, 'postsignin'])->name('postsignin'
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 
-
+Route::fallback(function () {
+    return response()->view('pages.errors.error-404', [], 404);
+});
 // Route::get('/signin', function () {
 //     return view('pages.auth.signin', ['title' => 'Sign In']);
 // })->name('signin');
