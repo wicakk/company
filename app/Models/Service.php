@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Service extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        // 'title',
+        // 'subtitle',
+        'nama',
+        'subnama',
+        'description',
+        'price',
+        'billing_period',
+    ];
+}

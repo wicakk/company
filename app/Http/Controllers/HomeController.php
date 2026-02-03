@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Home;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -100,9 +101,9 @@ class HomeController extends Controller
     {
         $homes = Home::all();
         $clients = Client::all();
+        $services = Service::all();
 
-
-        return view('pages.leading.index', compact('homes', 'clients'));
+        return view('pages.leading.index', compact('homes', 'clients', 'services'));
     }
 
 

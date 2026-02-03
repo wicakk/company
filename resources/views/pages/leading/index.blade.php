@@ -54,7 +54,7 @@
     <!-- Start block -->
     <section class="bg-gray-50 dark:bg-gray-800">
         {{-- weppeer-content-1 --}}
-        @include('pages.leading.layouts.wepper-content1')
+        {{-- @include('pages.leading.layouts.wepper-content1') --}}
     </section>
     <!-- End block -->
 

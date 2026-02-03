@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VisiMisiController;
 
@@ -54,6 +55,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
     Route::put('client/{client}', [ClientController::class, 'update'])->name('client.update');
     Route::delete('client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+
+    // Service
+    Route::get('service', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('service/create', [ServiceController::class, 'create'])->name('service.create');
+    Route::post('service', [ServiceController::class, 'store'])->name('service.store');
+    Route::get('service/{service}/edit', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::put('service/{service}', [ServiceController::class, 'update'])->name('service.update');
+    Route::delete('service/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('pages.profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('pages.profile.update');

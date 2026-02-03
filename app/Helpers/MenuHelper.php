@@ -47,7 +47,7 @@ class MenuHelper
                     ['name' => '404 Error', 'path' => '/error-404', 'pro' => false],
                     ['name' => 'Home', 'path' => '/home', 'pro' => false],
                     ['name' => 'Clients', 'path' => '/client', 'pro' => false],
-                    ['name' => 'Services', 'path' => '/services', 'pro' => false],
+                    ['name' => 'Services', 'path' => '/service', 'pro' => false],
                 ],
             ],
         ];
