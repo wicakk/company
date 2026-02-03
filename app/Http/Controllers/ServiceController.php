@@ -21,12 +21,11 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        // Bersihkan format harga
         $request->merge([
             'price' => str_replace(['.', ','], '', $request->price)
         ]);
 
-        $validated = $request->validate([
+        $request->validate([
             'nama'           => 'required|string',
             'subnama'        => 'required|string',
             'price'          => 'required|numeric',
@@ -35,19 +34,19 @@ class ServiceController extends Controller
             'foto'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        // Default foto
-        $validated['foto'] = 'noimage.png';
+        $foto = $request->file('foto');
+        $foto->storeAs('public', $foto->hashName());
 
-        if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')
-                ->store('services', 'public');
-        }
+        Service::create([
+            'nama' => $request->nama,
+            'subnama' => $request->subnama,
+            'price' => $request->price,
+            'description' => $request->description,
+            'billing_period' => $request->billing_period,
+            'foto' => $foto->hashName()
+        ]);
 
-        Service::create($validated);
-
-        return redirect()
-            ->route('service.index')
-            ->with('success', 'Add service success');
+        return redirect()->route('service.index')->with('success', 'Add Service Success');
     }
 
     public function edit(Service $service)
@@ -72,12 +71,13 @@ class ServiceController extends Controller
 
         if ($request->hasFile('foto')) {
             // Hapus foto lama
-            if ($service->foto !== 'noimage.png') {
-                Storage::disk('public')->delete($service->foto);
+            if ($service->foto !== "noimage.png") {
+                Storage::disk('public')->delete('public/' . $service->foto);
             }
 
-            $validated['foto'] = $request->file('foto')
-                ->store('services', 'public');
+            $foto = $request->file('foto');
+            $foto->storeAs('public', $foto->hashName());
+            $service->foto = $foto->hashName();
         }
 
         $service->update($validated);

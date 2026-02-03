@@ -46,7 +46,7 @@
     </section>
     <!-- End block -->
     <!-- Start block -->
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-900" id="client">
         @include('pages.leading.layouts.clients')
     </section>
     <!-- End block -->
@@ -60,7 +60,7 @@
 
 
     <!-- Start block -->
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-900" id="wepper-content2">
         {{-- weppeer-content-2 --}}
         @include('pages.leading.layouts.wepper-content2')
     </section>
@@ -91,7 +91,7 @@
 
     <!-- Start block -->
     {{-- service --}}
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-900" id="service">
         @include('pages.leading.layouts.service')
     </section>
     <!-- End block -->

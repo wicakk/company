@@ -9,11 +9,11 @@
         </div>
 
         <div class="mt-4" x-data="{ imageUrl: '/storage/public/{{ $service->foto }}' }">
-            <form enctype="multipart/form-data" method="POST" action="{{ route('home.update', $service) }}"
+            <form enctype="multipart/form-data" method="POST" action="{{ route('service.update', $service) }}"
                 class="flex gap-8">
                 @csrf
                 @method('PUT')
-
+                
                 <div class="w-1/2">
                     <img :src="imageUrl" class="rounded-md" />
                 </div>
