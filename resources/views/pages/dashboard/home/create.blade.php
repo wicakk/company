@@ -10,7 +10,6 @@
         <div class="mt-4" x-data="{ imageUrl: '/storage/noimage.png' }">
             <form enctype="multipart/form-data" method="POST" action="{{ route('home.store') }}" class="flex gap-8">
                 @csrf
-
                 <div class="w-1/2">
                     <img :src="imageUrl" class="rounded-md" />
                 </div>

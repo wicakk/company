@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Home;
+use App\Models\Misi;
 use App\Models\Service;
+use App\Models\Visi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -102,8 +104,10 @@ class HomeController extends Controller
         $homes = Home::all();
         $clients = Client::all();
         $services = Service::all();
+        $visis = Visi::all();
+        $misis = Misi::all();
 
-        return view('pages.leading.index', compact('homes', 'clients', 'services'));
+        return view('pages.leading.index', compact('homes', 'clients', 'services','visis', 'misis'));
     }
 
 

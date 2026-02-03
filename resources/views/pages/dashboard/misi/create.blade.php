@@ -8,7 +8,7 @@
         </div>
 
         <div class="mt-4" x-data="{ imageUrl: '/storage/noimage.png' }">
-            <form enctype="multipart/form-data" method="POST" action="{{ route('visi.store_visi') }}" class="flex gap-8">
+            <form enctype="multipart/form-data" method="POST" action="{{ route('misi.store_misi') }}" class="flex gap-8">
                 @csrf
 
                 <div class="w-1/2 hidden">

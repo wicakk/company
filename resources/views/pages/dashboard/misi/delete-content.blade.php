@@ -1,20 +1,20 @@
 <section class="space-y-6">
     <!-- Tombol Delete -->
     <x-danger-button x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-delete-visi')">
-        {{ __('Delete visi') }}
+        x-on:click.prevent="$dispatch('open-modal', 'confirm-delete-misi')">
+        {{ __('Delete misi') }}
     </x-danger-button>
 
     <!-- Modal -->
-    <x-modal name="confirm-delete-visi" focusable class="fixed inset-0 z-[9999]">
+    <x-modal name="confirm-delete-misi" focusable class="fixed inset-0 z-[9999]">
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6">
-            <form method="post" action="{{ route('visi.destroy_visi', $visi) }}" 
+            <form method="post" action="{{ route('misi.destroy_misi', $misi) }}" 
                   class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full max-w-md p-6">
                 @csrf
                 @method('DELETE')
 
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    {{ __('Are you sure you want to delete visi?') }}
+                    {{ __('Are you sure you want to delete misi?') }}
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
@@ -27,7 +27,7 @@
                     </x-secondary-button>
 
                     <x-danger-button type="submit" class="ml-3">
-                        {{ __('Delete visi') }}
+                        {{ __('Delete misi') }}
                     </x-danger-button>
                 </div>
             </form>

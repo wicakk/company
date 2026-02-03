@@ -4,75 +4,47 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 px-2">
 
         <div class="flex mt-6 justify-between items-center">
-            <h2 class="font-semibold text-xl">Edit Service</h2>
-            @include('pages.dashboard.service.delete-content')
+            <h2 class="font-semibold text-xl">Edit visi</h2>
+            @include('pages.dashboard.visi.delete-content')
         </div>
 
-        <div class="mt-4" x-data="{ imageUrl: '/storage/public/{{ $service->foto }}' }">
-            <form enctype="multipart/form-data" method="POST" action="{{ route('home.update', $service) }}"
+        <div class="mt-4" x-data="{ imageUrl: '/storage/public/{{ $visi->foto }}' }">
+            <form enctype="multipart/form-data" method="POST" action="{{ route('visi.update_visi', $visi) }}"
                 class="flex gap-8">
                 @csrf
                 @method('PUT')
 
-                <div class="w-1/2">
+                <div class="w-1/2 hidden">
                     <img :src="imageUrl" class="rounded-md" />
                 </div>
-                <div class="w-1/2">
-                    <div class="mt-4">
+                <div class="w-full">
+                    <div class="mt-4 hidden">
                         <x-input-label for="foto" :value="__('Foto')" />
                         <x-text-input accept="image/*" id="foto" class="block mt-1 w-full border p-2"
-                            type="file" name="foto" :value="$service->foto"
+                            type="file" name="foto" :value="$visi->foto"
                             @change="imageUrl = URL.createObjectURL($event.target.files[0])" />
                         <x-input-error :messages="$errors->get('foto')" class="mt-2" />
                     </div>
 
-                    {{-- <div class="mt-4">
+                    <div class="mt-4">
                         <x-input-label for="title" :value="__('title')" />
                         <x-text-input id="title" class="block mt-1 w-full" type="text" name="title"
-                            :value="$service->title" required />
+                            :value="$visi->title" required />
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="subtitle" :value="__('subtitle')" />
-                        <x-text-input id="subtitle" class="block mt-1 w-full" type="text" name="subtitle"
-                            :value="$service->subtitle" required />
-                        <x-input-error :messages="$errors->get('subtitle')" class="mt-2" />
-                    </div> --}}
-
-                    <div class="mt-4">
-                        <x-input-label for="nama" :value="__('nama')" />
-                        <x-text-input id="nama" class="block mt-1 w-full" type="text" name="nama"
-                            :value="$service->nama" required />
-                        <x-input-error :messages="$errors->get('nama')" class="mt-2" />
+                        <x-input-label for="slug" :value="__('slug')" />
+                        <x-text-input id="slug" class="block mt-1 w-full" type="text" name="slug"
+                            :value="$visi->slug" required />
+                        <x-input-error :messages="$errors->get('slug')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="subnama" :value="__('subnama')" />
-                        <x-text-input id="subnama" class="block mt-1 w-full" type="text" name="subnama"
-                            :value="$service->subnama" required />
-                        <x-input-error :messages="$errors->get('subnama')" class="mt-2" />
-                    </div>
-
-                    <div class="mt-4">
-                        <x-input-label for="price" :value="__('price')" />
-                        <x-text-input id="price" class="block mt-1 w-full" type="text" name="price"
-                            :value="$service->price" x-mask:dynamic="$money($input, ',')" required />
-                        <x-input-error :messages="$errors->get('price')" class="mt-2" />
-                    </div>
-
-                    <div class="mt-4">
-                        <x-input-label for="billing_period" :value="__('billing_period')" />
-                        <x-text-area id="billing_period" class="block mt-1 w-full" type="text"
-                            name="billing_period">{{ $service->billing_period }}</x-text-area>
-                        <x-input-error :messages="$errors->get('billing_period')" class="mt-2" />
-                    </div>
-
-                    <div class="mt-4">
-                        <x-input-label for="description" :value="__('description')" />
-                        <x-text-area id="description" class="block mt-1 w-full" type="text"
-                            name="description">{{ $service->description }}</x-text-area>
-                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        <x-input-label for="deskripsi" :value="__('deskripsi')" />
+                        <x-text-area id="deskripsi" class="block mt-1 w-full" type="text"
+                            name="deskripsi">{{ $visi->deskripsi }}</x-text-area>
+                        <x-input-error :messages="$errors->get('deskripsi')" class="mt-2" />
                     </div>
 
                     <x-primary-button class="justify-center w-full mt-4">

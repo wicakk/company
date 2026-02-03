@@ -19,7 +19,7 @@
         <div class="grid md:grid-cols-3 grid-cols-1 mt-4 gap-6">
             @foreach ($services as $service)
                 <div>
-                    <img src="{{ asset('storage/public/' . $service->foto) }}" class="h-96 w-full object-cover" />
+                    <img src="{{ asset('storage/public/' . $service->foto) }}" class="h-auto w-full object-cover" />
                     <div class="my-2">
                         <p class="text-xl font-light">{{ $service->nama }}</p>
                         <p class="font-semibold text-gray-400">Rp. {{ number_format($service->harga) }}</p>

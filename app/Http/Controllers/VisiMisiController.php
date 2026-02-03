@@ -2,55 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Misi;
 use App\Models\Visi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class VisiMisiController extends Controller
 {
-    public function index()
+    public function visi()
     {
-        $visimisis = Visi::paginate(12);
-        return view('pages.dashboard.client.index', compact('visimisis'));
+        $visis = Visi::paginate(12);
+        return view('pages.dashboard.visi.index', compact('visis'));
     }
 
-    public function create()
+    public function create_visi()
     {
-        return view('pages.dashboard.client.create');
+        return view('pages.dashboard.visi.create');
     }
 
-    public function store(Request $request)
+    public function store_visi(Request $request)
     {
-        // $request->merge([
-        //     'slug' => str_replace(['.', ','], '', $request->slug)
-        // ]);
-
         $request->validate([
-            'title' => 'required',
-            'slug' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg'
+            'title' => 'required|string',
+            'slug' => 'required|string|unique:visis,slug',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $foto = $request->file('foto');
-        $foto->storeAs('public', $foto->hashName());
+        $fotoName = 'noimage.png';
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoName = $foto->hashName();
+            $foto->storeAs('public', $fotoName);
+        }
 
         Visi::create([
             'title' => $request->title,
             'slug' => $request->slug,
             'deskripsi' => $request->deskripsi,
-            'foto' => $foto->hashName()
+            'foto' => $fotoName,
         ]);
 
-        return redirect()->route('home.index')->with('success', 'Add Home Success');
+        return redirect()->route('visi.index')->with('success', 'Add Visi Success');
     }
 
 
-    public function edit(Visi $visi)
+
+    public function edit_visi(Visi $visi)
     {
-        return view('pages.dashboard.client.edit', compact('home'));
+        return view('pages.dashboard.visi.edit', compact('visi'));
     }
 
-    public function update(Request $request, Visi $visi)
+    public function update_visi(Request $request, Visi $visi)
     {
         // $request->merge([
         //     'slug' => str_replace(['.', ','], '', $request->slug)
@@ -78,11 +81,11 @@ class VisiMisiController extends Controller
 
         $visi->update();
 
-        return redirect()->route('home.index')->with('success', 'Update Home Success');
+        return redirect()->route('visi.index')->with('success', 'Update visi Success');
     }
 
 
-    public function destroy(Visi $visi)
+    public function destroy_visi(Visi $visi)
     {
         if ($visi->foto !== "noimage.png") {
             Storage::disk('public')->delete($visi->foto);
@@ -90,6 +93,95 @@ class VisiMisiController extends Controller
 
         $visi->delete();
 
-        return redirect()->route('home.index')->with('success', 'Delete Home Success');
+        return redirect()->route('visi.index')->with('success', 'Delete visi Success');
+    }
+
+
+
+
+
+    public function misi()
+    {
+        $misis = Misi::paginate(12);
+        return view('pages.dashboard.misi.index', compact('misis'));
+    }
+
+    public function create_misi()
+    {
+        return view('pages.dashboard.misi.create');
+    }
+
+    public function store_misi(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'slug' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $fotoName = 'noimage.png';
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoName = $foto->hashName();
+            $foto->storeAs('public', $fotoName);
+        }
+
+        Misi::create([
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'deskripsi' => $request->deskripsi,
+            'foto' => $fotoName, // 🔥 FIX DI SINI
+        ]);
+
+        return redirect()->route('misi.index')->with('success', 'Add misi Success');
+    }
+
+    public function edit_misi(Misi $misi)
+    {
+        return view('pages.dashboard.misi.edit', compact('misi'));
+    }
+
+    public function update(Request $request, Misi $misi)
+    {
+        // $request->merge([
+        //     'slug' => str_replace(['.', ','], '', $request->slug)
+        // ]);
+
+        $request->validate([
+            'title' => 'required|string',
+            'slug' => 'required|string',
+        ]);
+
+        $misi->title = $request->title;
+        $misi->slug = $request->slug;
+        $misi->deskripsi = $request->deskripsi;
+
+        if ($request->file('foto')) {
+
+            if ($misi->foto !== "noimage.png") {
+                Storage::disk('public')->delete('public/' . $misi->foto);
+            }
+
+            $foto = $request->file('foto');
+            $foto->storeAs('public', $foto->hashName());
+            $misi->foto = $foto->hashName();
+        }
+
+        $misi->update();
+
+        return redirect()->route('misi.index')->with('success', 'Update misi Success');
+    }
+
+
+    public function destroy(Misi $misi)
+    {
+        if ($misi->foto !== "noimage.png") {
+            Storage::disk('public')->delete($misi->foto);
+        }
+
+        $misi->delete();
+
+        return redirect()->route('misi.index')->with('success', 'Delete misi Success');
     }
 }

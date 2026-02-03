@@ -64,6 +64,24 @@ Route::middleware(['auth'])->group(function () {
     Route::put('service/{service}', [ServiceController::class, 'update'])->name('service.update');
     Route::delete('service/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
+    // Visi
+    Route::get('visi', [VisiMisiController::class, 'visi'])->name('visi.index');
+    Route::get('visi/create', [VisiMisiController::class, 'create_visi'])->name('visi.create_visi');
+    Route::post('visi', [VisiMisiController::class, 'store_visi'])->name('visi.store_visi');
+    Route::get('visi/{visi}/edit', [VisiMisiController::class, 'edit_visi'])->name('visi.edit_visi');
+    Route::put('visi/{visi}', [VisiMisiController::class, 'update_visi'])->name('visi.update_visi');
+    Route::delete('visi/{visi}', [VisiMisiController::class, 'destroy_visi'])->name('visi.destroy_visi');
+
+
+    // Misi
+    Route::get('misi', [VisiMisiController::class, 'misi'])->name('misi.index');
+    Route::get('misi/create', [VisiMisiController::class, 'create_misi'])->name('misi.create_misi');
+    Route::post('misi', [VisiMisiController::class, 'store_misi'])->name('misi.store_misi');
+    Route::get('misi/{visi}/edit', [VisiMisiController::class, 'edit_misi'])->name('misi.edit_misi');
+    Route::put('misi/{visi}', [VisiMisiController::class, 'update_misi'])->name('misi.update_misi');
+    Route::delete('misi/{visi}', [VisiMisiController::class, 'destroy_misi'])->name('misi.destroy_misi');
+
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('pages.profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('pages.profile.update');
 
