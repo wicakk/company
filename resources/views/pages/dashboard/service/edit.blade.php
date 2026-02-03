@@ -19,7 +19,7 @@
                 </div>
                 <div class="w-1/2">
                     <div class="mt-4">
-                        <x-input-label for="foto" :value="__('Foto')" />
+                        <x-input-label for="foto" :value="__('foto')" />
                         <x-text-input accept="image/*" id="foto" class="block mt-1 w-full border p-2"
                             type="file" name="foto" :value="$service->foto"
                             @change="imageUrl = URL.createObjectURL($event.target.files[0])" />

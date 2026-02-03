@@ -18,5 +18,6 @@ class Service extends Model
         'description',
         'price',
         'billing_period',
+        'foto'
     ];
 }

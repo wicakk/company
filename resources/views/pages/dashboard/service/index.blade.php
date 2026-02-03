@@ -22,8 +22,8 @@
                     <img src="{{ asset('storage/public/' . $service->foto) }}" class="h-auto w-full object-cover" />
                     <div class="my-2">
                         <p class="text-xl font-light">{{ $service->nama }}</p>
-                        <p class="font-semibold text-gray-400">Rp. {{ number_format($service->harga) }}</p>
-                        <p class="font-semibold text-gray-400">{{ $service->deskripsi }}</p>
+                        <p class="font-semibold text-gray-400">Rp. {{ number_format($service->price) }}</p>
+                        <p class="font-semibold text-gray-400">{{ $service->description }}</p>
                     </div>
                     <a href="{{ route('service.edit', $service) }}">
                         <button class="bg-gray-100 px-10 py-2 w-full rounded-md font-semibold">Edit</button>

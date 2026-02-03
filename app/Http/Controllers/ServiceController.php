@@ -21,38 +21,34 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
+        // Bersihkan format harga
         $request->merge([
             'price' => str_replace(['.', ','], '', $request->price)
         ]);
 
-        $request->validate([
-            // 'title' => 'required|string',
-            // 'subtitle' => 'required|string',
-            'nama' => 'required|string',
-            'subnama' => 'required|string',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg'
+        $validated = $request->validate([
+            'nama'           => 'required|string',
+            'subnama'        => 'required|string',
+            'price'          => 'required|numeric',
+            'description'    => 'required|string',
+            'billing_period' => 'required|string',
+            'foto'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        $foto = $request->file('foto');
-        $foto->storeAs('public', $foto->hashName());
+        // Default foto
+        $validated['foto'] = 'noimage.png';
 
-        Service::create([
-            // 'title' => $request->title,
-            // 'subtitle' => $request->subtitle,
-            'nama' => $request->nama,
-            'subnama' => $request->subnama,
-            'price' => $request->price,
-            'description' => $request->description,
-            'foto' => $foto->hashName()
-        ]);
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')
+                ->store('services', 'public');
+        }
 
-       
+        Service::create($validated);
 
-        return redirect()->route('service.index')->with('success', 'Add service Success');
+        return redirect()
+            ->route('service.index')
+            ->with('success', 'Add service success');
     }
-
 
     public function edit(Service $service)
     {
@@ -65,48 +61,42 @@ class ServiceController extends Controller
             'price' => str_replace(['.', ','], '', $request->price)
         ]);
 
-        $request->validate([
-            // 'title' => 'required|string',
-            // 'subtitle' => 'required|string',
-            'nama' => 'required|string',
-            'subnama' => 'required|string',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg'
+        $validated = $request->validate([
+            'nama'           => 'required|string',
+            'subnama'        => 'required|string',
+            'price'          => 'required|numeric',
+            'description'    => 'required|string',
+            'billing_period' => 'required|string',
+            'foto'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-            $service->title = $request->title;
-            $service->subtitle = $request->subtitle;
-            $service->nama = $request->nama;
-            $service->subnama = $request->subnama;
-            $service->price = $request->price;
-            $service->description = $request->description;
-
-        if ($request->file('foto')) {
-
-            if ($service->foto !== "noimage.png") {
-                Storage::disk('public')->delete('public/' . $service->foto);
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama
+            if ($service->foto !== 'noimage.png') {
+                Storage::disk('public')->delete($service->foto);
             }
 
-            $foto = $request->file('foto');
-            $foto->storeAs('public', $foto->hashName());
-            $service->foto = $foto->hashName();
+            $validated['foto'] = $request->file('foto')
+                ->store('services', 'public');
         }
 
-        $service->update();
+        $service->update($validated);
 
-        return redirect()->route('service.index')->with('success', 'Update service Success');
+        return redirect()
+            ->route('service.index')
+            ->with('success', 'Update service success');
     }
-
 
     public function destroy(Service $service)
     {
-        if ($service->foto !== "noimage.png") {
+        if ($service->foto !== 'noimage.png') {
             Storage::disk('public')->delete($service->foto);
         }
 
         $service->delete();
 
-        return redirect()->route('service.index')->with('success', 'Delete service Success');
+        return redirect()
+            ->route('service.index')
+            ->with('success', 'Delete service success');
     }
 }
