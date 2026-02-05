@@ -18,6 +18,7 @@ Route::get('/', function () {
 // landing page
 Route::get('/', [HomeController::class, 'landing_thumbnails']);
 Route::get('/team', [HomeController::class, 'landing_teams']);
+Route::get('/contact-us', [HomeController::class, 'landing_contact']);
 // Route::view('/team', 'pages.leading.layouts.index')->name('team.index');
 
 

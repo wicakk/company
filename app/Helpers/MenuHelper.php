@@ -57,6 +57,11 @@ class MenuHelper
                 'name' => 'Teams',
                 'path' => '/teams',
             ],
+             [
+                'icon' => 'user-profile',
+                'name' => 'Contact',
+                'path' => '/contact-us',
+            ],
         ];
     }
 

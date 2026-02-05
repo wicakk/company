@@ -117,6 +117,12 @@ class HomeController extends Controller
         return view('pages.leading.layouts.teams', compact('teams'));
     }
 
+    public function landing_contact()
+    {
+        $contact = Teams::all();
+        return view('pages.leading.layouts.contact-us', compact('contact'));
+    }
+
 
 
 }
