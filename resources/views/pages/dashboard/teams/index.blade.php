@@ -10,7 +10,7 @@
         <div class="grid md:grid-cols-3 grid-cols-1 mt-6 gap-6">
             @foreach ($teams as $team)
                 <div class="bg-white rounded-xl shadow border p-5 flex flex-col"> {{-- FOTO --}} <img
-                        src="{{ $team->photo ? asset('storage/' . $team->photo) : 'https://api.dicebear.com/7.x/initials/svg?seed=' . $team->first_name }}"
+                        src="{{ $team->photo ? asset('storage/' . $team->photo) . $team->first_name }}"
                         class="h-48 w-full object-cover rounded-lg mb-4" /> {{-- NAMA --}} <h3
                         class="text-lg font-bold text-gray-800"> {{ $team->first_name }} {{ $team->last_name }} </h3>
                     {{-- EMAIL --}} @if ($team->email)
