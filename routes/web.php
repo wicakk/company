@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TeamsController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VisiMisiController;
 
@@ -16,6 +17,8 @@ Route::get('/', function () {
 
 // landing page
 Route::get('/', [HomeController::class, 'landing_thumbnails']);
+Route::get('/team', [HomeController::class, 'landing_teams']);
+// Route::view('/team', 'pages.leading.layouts.index')->name('team.index');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -82,6 +85,16 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('misi/{visi}', [VisiMisiController::class, 'destroy_misi'])->name('misi.destroy_misi');
 
 
+    // teams
+    Route::get('teams', [TeamsController::class, 'index'])->name('teams.index');
+    Route::get('teams/create', [TeamsController::class, 'create'])->name('teams.create');
+    Route::post('teams', [TeamsController::class, 'store'])->name('teams.store');
+    Route::get('teams/{team}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
+    Route::put('teams/{team}', [TeamsController::class, 'update'])->name('pages.teams.update');
+    Route::delete('teams/{team}', [TeamsController::class, 'destroy'])->name('teams.destroy');
+
+
+    // profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('pages.profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('pages.profile.update');
 

@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Home;
 use App\Models\Misi;
 use App\Models\Service;
+use App\Models\Teams;
 use App\Models\Visi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -108,6 +109,12 @@ class HomeController extends Controller
         $misis = Misi::all();
 
         return view('pages.leading.index', compact('homes', 'clients', 'services','visis', 'misis'));
+    }
+
+    public function landing_teams()
+    {
+        $teams = Teams::all();
+        return view('pages.leading.layouts.teams', compact('teams'));
     }
 
 

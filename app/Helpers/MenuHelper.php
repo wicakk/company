@@ -52,6 +52,11 @@ class MenuHelper
                     ['name' => 'Misi', 'path' => '/misi', 'pro' => false],
                 ],
             ],
+            [
+                'icon' => 'user-profile',
+                'name' => 'Teams',
+                'path' => '/teams',
+            ],
         ];
     }
 
