@@ -1,7 +1,8 @@
 @extends('pages.layout')
 
+@include('pages.leading.layouts.header')
 @section('content')
-    <section class="bg-white py-16">
+    <section class="bg-white py-16 mt-5">
         <div class="max-w-6xl mx-auto px-6 text-center">
 
             <!-- Heading -->
@@ -46,6 +47,6 @@
             </div>
         </div>
     </section>
+@include('pages.leading.layouts.footer')
 
-    
 @endsection

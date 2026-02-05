@@ -9,10 +9,14 @@
                     Team Member </button> </a> </div>
         <div class="grid md:grid-cols-3 grid-cols-1 mt-6 gap-6">
             @foreach ($teams as $team)
-                <div class="bg-white rounded-xl shadow border p-5 flex flex-col"> {{-- FOTO --}} <img
-                        src="{{ $team->photo ? asset('storage/' . $team->photo) . $team->first_name }}"
-                        class="h-48 w-full object-cover rounded-lg mb-4" /> {{-- NAMA --}} <h3
-                        class="text-lg font-bold text-gray-800"> {{ $team->first_name }} {{ $team->last_name }} </h3>
+                <div class="bg-white rounded-xl shadow border p-5 flex flex-col"> {{-- FOTO --}}
+                    <img src="{{ $team->photo
+                        ? asset('storage/' . $team->photo)
+                        : 'https://api.dicebear.com/7.x/initials/svg?seed=' . $team->first_name }}"
+                        class="h-48 w-full object-cover rounded-lg mb-4" />
+
+                    {{-- NAMA --}} <h3 class="text-lg font-bold text-gray-800"> {{ $team->first_name }}
+                        {{ $team->last_name }} </h3>
                     {{-- EMAIL --}} @if ($team->email)
                         <p class="text-sm text-gray-500">{{ $team->email }}</p>
                         @endif {{-- BIO --}} @if ($team->bio)
@@ -25,11 +29,10 @@
                                     <a href="{{ $team->instagram }}" target="_blank"
                                         class="text-pink-600 text-sm font-medium">Instagram</a>
                                 @endif
-                        </div> {{-- ACTION BUTTONS --}} <div class="flex gap-2 mt-5"> 
-                            <button
-                                @click="$dispatch('open-team-info-modal')"
+                        </div> {{-- ACTION BUTTONS --}} <div class="flex gap-2 mt-5">
+                            <button @click="$dispatch('open-team-info-modal')"
                                 class="bg-yellow-400 hover:bg-yellow-500 text-white w-full py-2 rounded-md text-sm font-semibold">
-                                 Edit 
+                                Edit
                             </button>
                             <form action="{{ route('teams.destroy', $team->id) }}" method="POST" class="w-full"
                                 onsubmit="return confirm('Yakin mau hapus member ini?')"> @csrf @method('DELETE')
@@ -39,7 +42,7 @@
                             </form>
                         </div>
                 </div>
-            
+
         </div> <x-ui.modal x-data="{ open: false }" @open-team-info-modal.window="open = true" :isOpen="false"
             class="max-w-[700px]">
             <div
