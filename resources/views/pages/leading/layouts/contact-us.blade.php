@@ -1,123 +1,312 @@
-@extends('pages.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Support Section</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@section('content')
-@include('pages.leading.layouts.header')
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<section class=" py-20 mx-10">
-    <div class="mx-auto px-6">
+  <style>
+    /* hide scrollbar */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
 
-        {{-- Heading --}}
-        <div class="text-center py-8 mx-auto lg:py-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">
-                We use an agile approach to test assumptions and connect with the needs of your audience early and often.
-            </p>
-        </div>
+    <header class="fixed w-full z-50">
+    <nav class="bg-white border-gray-200 py-2.5 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
 
-        <div class="grid py-24 lg:grid-cols-2 gap-12">
+            <!-- Logo -->
+            <a href="#" class="flex items-center">
+                <img src="./images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Company Logo" />
+                <span class="self-center text-xl font-semibold whitespace-nowrap text-gray-900">
+                    company
+                </span>
+            </a>
 
-            {{-- LEFT : FORM --}}
-            <div class="bg-white p-4 rounded-2xl shadow-sm">
-                <form class="space-y-6">
+            <!-- Right button -->
+            <div class="flex items-center lg:order-2">
+                <div class="hidden mt-2 mr-4 sm:inline-block">
+                    <a href="#service"
+                        class="text-purple-700 font-semibold hover:underline">
+                        Get Started
+                    </a>
+                </div>
 
-                    <div class="grid sm:grid-cols-2 gap-6">
-                        <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                            <input type="text" placeholder="Bonnie"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                        </div>
+                <a href="#contact"
+                    class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 sm:mr-2 lg:mr-0">
+                    Contact
+                </a>
 
-                        <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                            <input type="text" placeholder="Green"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                        </div>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 gap-6">
-                        <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Your email</label>
-                            <input type="email" placeholder="name@company.com"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                        </div>
-
-                        <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                            <input type="text" placeholder="+12 345 6789"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Your message</label>
-                        <textarea rows="5" placeholder="Leave a comment..."
-                            class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"></textarea>
-                    </div>
-
-                    <p class="text-sm text-gray-500 leading-relaxed">
-                        By submitting this form you agree to our
-                        <a href="#" class="text-blue-600 hover:underline">terms and conditions</a>
-                        and our
-                        <a href="#" class="text-blue-600 hover:underline">privacy policy</a>.
-                    </p>
-
-                    <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg shadow-sm transition">
-                        Send message
-                    </button>
-                </form>
+                <!-- Mobile Button -->
+                <button data-collapse-toggle="mobile-menu-2" type="button"
+                    class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    aria-controls="mobile-menu-2" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                            clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </button>
             </div>
 
-            {{-- RIGHT : COMPANY INFO --}}
-            <div class="bg-white p-4 rounded-2xl shadow-sm space-y-10">
+            <!-- Menu -->
+            <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
+                id="mobile-menu-2">
+                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
 
-                {{-- Company --}}
-                <div class="flex items-start gap-5">
-                    <div class="bg-blue-50 text-blue-600 p-4 rounded-xl">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"></path>
-                        </svg>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="font-semibold text-lg text-gray-900 mb-1">Company information</h4>
-                        <p class="text-gray-600">Themesberg LLC</p>
-                        <p class="text-gray-600">Tax id: USXXXXXX</p>
-                    </div>
-                </div>
+                    <li>
+                        <a href="#"
+                            class="block py-2 pl-3 pr-4 text-purple-700 font-semibold lg:p-0">
+                            Home
+                        </a>
+                    </li>
 
-                {{-- Address --}}
-                <div class="flex items-start gap-5">
-                    <div class="bg-blue-50 text-blue-600 p-4 rounded-xl">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M12 21c-4-4-6-7-6-10a6 6 0 1112 0c0 3-2 6-6 10z"></path>
-                        </svg>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="font-semibold text-lg text-gray-900 mb-1">Address</h4>
-                        <p class="text-gray-600">SILVER LAKE, United States</p>
-                        <p class="text-gray-600">1941 Late Avenue</p>
-                        <p class="text-gray-600">Zip Code/Post code: 03875</p>
-                    </div>
-                </div>
+                    <li>
+                        <a href="#wepper-content2"
+                            class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
+                            Visi & Misi
+                        </a>
+                    </li>
 
-                {{-- Phone --}}
-                <div class="flex items-start gap-5">
-                    <div class="bg-blue-50 text-blue-600 p-4 rounded-xl">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M22 16.92V21a1 1 0 01-1.09 1A19.79 19.79 0 013 5.09 1 1 0 014 4h4.09a1 1 0 011 .75l1 4.09a1 1 0 01-.27.91l-2.2 2.2a16 16 0 006.92 6.92l2.2-2.2a1 1 0 01.91-.27l4.09 1a1 1 0 01.75 1z"/>
-                        </svg>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="font-semibold text-lg text-gray-900 mb-1">Call us</h4>
-                        <p class="text-gray-600">Call us to speak to a member of our team.</p>
-                        <p class="text-gray-600">We are always happy to help.</p>
-                    </div>
-                </div>
+                    <li>
+                        <a href="#client"
+                            class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
+                            Clients
+                        </a>
+                    </li>
 
+                    <li>
+                        <a href="#service"
+                            class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
+                            Service
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#team"
+                            class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
+                            Team
+                        </a>
+                    </li>
+
+                </ul>
             </div>
         </div>
+    </nav>
+</header>
+
+
+<section class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+
+    <!-- Header -->
+    <p class="text-sm text-blue-600 font-medium mb-3">
+      Contact us
+    </p>
+
+    <h2 class="text-4xl font-bold text-gray-900 mb-4">
+      Need help? We’re here for you 24/7.
+    </h2>
+
+    <p class="text-gray-500 max-w-2xl mx-auto mb-8">
+      Our dedicated team of growth experts is ready to help around the clock.
+      Access 24/7 support through our award-winning network.
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex justify-center gap-4 mb-16">
+      <button
+        class="flex items-center gap-2 px-6 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100">
+        Company Teams
+      </button>
+      <button
+        class="px-6 py-3 rounded-full bg-blue-600 text-white hover:bg-blue-700">
+        Contact Teams
+      </button>
     </div>
+
+    <!-- Team Slider -->
+    <div class="relative">
+      <div class="flex gap-6 overflow-x-auto pb-6 scrollbar-hide">
+
+        <!-- Card -->
+        <div class="min-w-[220px] bg-white rounded-2xl shadow-lg p-4 text-center">
+          <img src="https://i.pravatar.cc/150?img=12"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+          <h4 class="font-semibold text-gray-900">Marcus Williams</h4>
+          <p class="text-sm text-gray-500">Customer Success Lead</p>
+        </div>
+
+        <div class="min-w-[220px] bg-white rounded-2xl shadow-lg p-4 text-center">
+          <img src="https://i.pravatar.cc/150?img=32"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+          <h4 class="font-semibold text-gray-900">Heidi Anders</h4>
+          <p class="text-sm text-gray-500">VP of Customer Success</p>
+        </div>
+
+        <div class="min-w-[220px] bg-white rounded-2xl shadow-lg p-4 text-center">
+          <img src="https://i.pravatar.cc/150?img=45"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+          <h4 class="font-semibold text-gray-900">Frankie Sullivan</h4>
+          <p class="text-sm text-gray-500">Payments Support</p>
+        </div>
+
+        <div class="min-w-[220px] bg-white rounded-2xl shadow-lg p-4 text-center">
+          <img src="https://i.pravatar.cc/150?img=18"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+          <h4 class="font-semibold text-gray-900">Richard Mills</h4>
+          <p class="text-sm text-gray-500">Payments Support</p>
+        </div>
+
+        <div class="min-w-[220px] bg-white rounded-2xl shadow-lg p-4 text-center">
+          <img src="https://i.pravatar.cc/150?img=9"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+          <h4 class="font-semibold text-gray-900">Sophie Chamberlain</h4>
+          <p class="text-sm text-gray-500">Specialized Support</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-20 text-left">
+
+      <!-- Form -->
+      <form action="{{ route('contact.store') }}" method="POST">
+            @csrf
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <input type="text" name="first_name" placeholder="First name" class="border rounded-lg px-4 py-2 w-full">
+                <input type="text" name="last_name" placeholder="Last name" class="border rounded-lg px-4 py-2 w-full">
+            </div>
+
+            <input type="email" name="email" placeholder="you@company.com"
+                class="border rounded-lg px-4 py-2 w-full mb-4">
+
+            <input type="text" name="phone" placeholder="(+62)"
+                class="border rounded-lg px-4 py-2 w-full mb-4">
+
+            <textarea name="message" placeholder="Message Your ..."
+                class="border rounded-lg px-4 py-2 w-full mb-4"></textarea>
+
+            <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+                Submit
+            </button>
+        </form>
+
+
+      <!-- Info -->
+      <div>
+        <h4 class="font-semibold mb-2">Chat to sales</h4>
+        <p class="text-gray-500 mb-4">
+          Interested in switching? Speak to our friendly team.
+        </p>
+        <a href="#" class="text-blue-600 font-medium">
+          sales@untitledui.com
+        </a>
+
+        <h4 class="font-semibold mt-8 mb-2">Email support</h4>
+        <p class="text-gray-500">
+          Email us and we’ll get back to you within 24 hours.
+        </p>
+        <a href="#" class="text-blue-600 font-medium">
+          support@untitledui.com
+        </a>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-@include('pages.leading.layouts.footer')
-@endsection
+
+<footer class="bg-white">
+    <div class="max-w-screen-xl p-4 py-6 mx-auto lg:py-16 md:p-8 lg:p-10">
+
+        <div class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
+
+            <!-- Company -->
+            <div>
+                <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                    Company
+                </h3>
+                <ul class="text-gray-500">
+                    <li class="mb-4"><a href="#" class="hover:underline">About</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Careers</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Brand Center</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Help Center -->
+            <div>
+                <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                    Help Center
+                </h3>
+                <ul class="text-gray-500">
+                    <li class="mb-4"><a href="#" class="hover:underline">Discord Server</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Twitter</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Facebook</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal -->
+            <div>
+                <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                    Legal
+                </h3>
+                <ul class="text-gray-500">
+                    <li class="mb-4"><a href="#" class="hover:underline">Privacy Policy</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Licensing</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Terms</a></li>
+                </ul>
+            </div>
+
+            <!-- Company Duplicate (kalau mau, bisa diganti) -->
+            <div>
+                <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                    Company
+                </h3>
+                <ul class="text-gray-500">
+                    <li class="mb-4"><a href="#" class="hover:underline">About</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Careers</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Brand Center</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Download -->
+            <div>
+                <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                    Download
+                </h3>
+                <ul class="text-gray-500">
+                    <li class="mb-4"><a href="#" class="hover:underline">iOS</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Android</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">Windows</a></li>
+                    <li class="mb-4"><a href="#" class="hover:underline">MacOS</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8">
+
+    </div>
+</footer>
+
+
+</body>
+</html>

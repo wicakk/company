@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -19,7 +20,9 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'landing_thumbnails']);
 Route::get('/team', [HomeController::class, 'landing_teams']);
 Route::get('/contact-us', [HomeController::class, 'landing_contact']);
-// Route::view('/team', 'pages.leading.layouts.index')->name('team.index');
+Route::post('/contact-us', [ContactController::class, 'store'])
+    ->name('contact.store');
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -27,6 +30,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('pages.dashboard.ecommerce', ['title' => 'Company Dashboard']);
     })->name('dashboard');
+
+    Route::get('/contact', function () {
+        return view('pages.dashboard.contact.index', ['title' => 'Company contact']);
+    })->name('contact');
 
     Route::get('/profile', function () {
         return view('pages.profile', ['title' => 'Profile']);
@@ -93,6 +100,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('teams/{team}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
     Route::put('teams/{team}', [TeamsController::class, 'update'])->name('pages.teams.update');
     Route::delete('teams/{team}', [TeamsController::class, 'destroy'])->name('teams.destroy');
+
+    //contact
+    Route::get('/contact', [ContactController::class, 'index']);
+    Route::delete('contact/{contact}', [ContactController::class, 'destroy'])->name('contact.destroy');
 
 
     // profile
