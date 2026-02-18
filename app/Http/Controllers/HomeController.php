@@ -31,9 +31,10 @@ class HomeController extends Controller
         // ]);
 
         $request->validate([
-            'title' => 'required',
-            'slug' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg'
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:5000',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $foto = $request->file('foto');
@@ -62,8 +63,10 @@ class HomeController extends Controller
         // ]);
 
         $request->validate([
-            'title' => 'required|string',
-            'slug' => 'required|string',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:5000',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $home->title = $request->title;

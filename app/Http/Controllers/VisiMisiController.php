@@ -23,8 +23,9 @@ class VisiMisiController extends Controller
     public function store_visi(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
-            'slug' => 'required|string|unique:visis,slug',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:visis,slug',
+            'deskripsi' => 'nullable|string|max:5000',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -55,13 +56,11 @@ class VisiMisiController extends Controller
 
     public function update_visi(Request $request, Visi $visi)
     {
-        // $request->merge([
-        //     'slug' => str_replace(['.', ','], '', $request->slug)
-        // ]);
-
         $request->validate([
-            'title' => 'required|string',
-            'slug' => 'required|string',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:5000',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $visi->title = $request->title;
@@ -114,8 +113,9 @@ class VisiMisiController extends Controller
     public function store_misi(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
-            'slug' => 'required|string',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:5000',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -144,13 +144,11 @@ class VisiMisiController extends Controller
 
     public function update(Request $request, Misi $misi)
     {
-        // $request->merge([
-        //     'slug' => str_replace(['.', ','], '', $request->slug)
-        // ]);
-
         $request->validate([
-            'title' => 'required|string',
-            'slug' => 'required|string',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:5000',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $misi->title = $request->title;

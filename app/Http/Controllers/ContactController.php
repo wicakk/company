@@ -18,7 +18,7 @@ class ContactController extends Controller
     // Simpan dari form landing page
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'first_name' => [
                 'required',
                 'string',
@@ -47,8 +47,7 @@ class ContactController extends Controller
             ],
         ]);
 
-
-        Contact::create($request->all());
+        Contact::create($validated);
 
         return back()->with('success', 'Message sent successfully!');
     }
