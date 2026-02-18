@@ -26,7 +26,7 @@
         <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
 
             <!-- Logo -->
-            <a href="#" class="flex items-center">
+            <a href="{{ url('/') }}" class="flex items-center">
                 <img src="./images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Company Logo" />
                 <span class="self-center text-xl font-semibold whitespace-nowrap text-gray-900">
                     company
@@ -36,13 +36,13 @@
             <!-- Right button -->
             <div class="flex items-center lg:order-2">
                 <div class="hidden mt-2 mr-4 sm:inline-block">
-                    <a href="#service"
+                    <a href="{{ url('/') }}#service"
                         class="text-purple-700 font-semibold hover:underline">
                         Get Started
                     </a>
                 </div>
 
-                <a href="#contact"
+                <a href="{{ url('/contact-us') }}"
                     class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 sm:mr-2 lg:mr-0">
                     Contact
                 </a>
@@ -67,35 +67,35 @@
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
 
                     <li>
-                        <a href="#"
+                        <a href="{{ url('/') }}"
                             class="block py-2 pl-3 pr-4 text-purple-700 font-semibold lg:p-0">
                             Home
                         </a>
                     </li>
 
                     <li>
-                        <a href="#wepper-content2"
+                        <a href="{{ url('/') }}#wepper-content2"
                             class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
                             Visi & Misi
                         </a>
                     </li>
 
                     <li>
-                        <a href="#client"
+                        <a href="{{ url('/') }}#client"
                             class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
                             Clients
                         </a>
                     </li>
 
                     <li>
-                        <a href="#service"
+                        <a href="{{ url('/') }}#service"
                             class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
                             Service
                         </a>
                     </li>
 
                     <li>
-                        <a href="#team"
+                        <a href="{{ url('/team') }}"
                             class="block py-2 pl-3 pr-4 text-gray-700 hover:text-purple-700 lg:p-0">
                             Team
                         </a>
