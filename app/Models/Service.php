@@ -18,4 +18,8 @@ class Service extends Model
         'billing_period',
         'foto'
     ];
+
+    protected $casts = [
+        'description' => 'array',
+    ];
 }

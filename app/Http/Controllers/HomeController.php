@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Faq;
 use App\Models\Home;
 use App\Models\Misi;
 use App\Models\Service;
@@ -110,8 +111,9 @@ class HomeController extends Controller
         $services = Service::all();
         $visis = Visi::all();
         $misis = Misi::all();
+        $faqs = Faq::all();
 
-        return view('pages.leading.index', compact('homes', 'clients', 'services','visis', 'misis'));
+        return view('pages.leading.index', compact('homes', 'clients', 'services','visis', 'misis', 'faqs'));
     }
 
     public function landing_teams()

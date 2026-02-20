@@ -142,7 +142,7 @@ class VisiMisiController extends Controller
         return view('pages.dashboard.misi.edit', compact('misi'));
     }
 
-    public function update(Request $request, Misi $misi)
+    public function update_misi(Request $request, Misi $misi)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -158,7 +158,7 @@ class VisiMisiController extends Controller
         if ($request->file('foto')) {
 
             if ($misi->foto !== "noimage.png") {
-                Storage::disk('public')->delete('public/' . $misi->foto);
+                Storage::disk('public')->delete($misi->foto);
             }
 
             $foto = $request->file('foto');
@@ -172,7 +172,7 @@ class VisiMisiController extends Controller
     }
 
 
-    public function destroy(Misi $misi)
+    public function destroy_misi(Misi $misi)
     {
         if ($misi->foto !== "noimage.png") {
             Storage::disk('public')->delete($misi->foto);

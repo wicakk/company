@@ -9,11 +9,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VisiMisiController;
 
 Route::get('/', function () {
-        return view('pages.leading.index', ['title' => 'Company']);
+        return view('pages.leading.index', ['title' => 'PT Digital Teknologi Quantum']);
     })->name('company');
 
 // landing page
@@ -21,6 +22,7 @@ Route::get('/', [HomeController::class, 'landing_thumbnails']);
 Route::get('/team', [HomeController::class, 'landing_teams']);
 Route::get('/contact-us', [HomeController::class, 'landing_contact']);
 Route::post('/contact-us', [ContactController::class, 'store'])
+    ->middleware('throttle:5,1')
     ->name('contact.store');
 
 
@@ -28,11 +30,63 @@ Route::post('/contact-us', [ContactController::class, 'store'])
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('pages.dashboard.ecommerce', ['title' => 'Company Dashboard']);
+        $ip = request()->ip();
+
+        // Log visitor jika IP belum tercatat hari ini
+        $today = now()->toDateString();
+        $exists = \App\Models\Visitor::where('ip_address', $ip)
+            ->whereDate('created_at', $today)
+            ->exists();
+
+        if (!$exists) {
+            $geo = [];
+            try {
+                $safeIp = filter_var($ip, FILTER_VALIDATE_IP);
+                if ($safeIp) {
+                    $context = stream_context_create(['http' => ['timeout' => 3]]);
+                    $response = file_get_contents("https://ipapi.co/{$safeIp}/json/", false, $context);
+                    if ($response) {
+                        $data = json_decode($response, true);
+                        $geo = [
+                            'country' => $data['country_name'] ?? null,
+                            'countryCode' => $data['country_code'] ?? null,
+                            'city' => $data['city'] ?? null,
+                        ];
+                    }
+                }
+            } catch (\Exception $e) {
+                // ignore
+            }
+
+            \App\Models\Visitor::create([
+                'ip_address' => $ip,
+                'country' => $geo['country'] ?? 'Unknown',
+                'country_code' => $geo['countryCode'] ?? null,
+                'city' => $geo['city'] ?? null,
+            ]);
+        }
+
+        $services = \App\Models\Service::all();
+
+        // Statistik visitor per negara
+        $visitorStats = \App\Models\Visitor::selectRaw('country, country_code, COUNT(*) as total')
+            ->groupBy('country', 'country_code')
+            ->orderByDesc('total')
+            ->get();
+
+        // List visitor terbaru dengan pagination
+        $recentVisitors = \App\Models\Visitor::latest()->paginate(10);
+
+        return view('pages.dashboard.ecommerce', [
+            'title' => 'PT Digital Teknologi Quantum Dashboard',
+            'services' => $services,
+            'visitorStats' => $visitorStats,
+            'recentVisitors' => $recentVisitors,
+        ]);
     })->name('dashboard');
 
     Route::get('/contact', function () {
-        return view('pages.dashboard.contact.index', ['title' => 'Company contact']);
+        return view('pages.dashboard.contact.index', ['title' => 'PT Digital Teknologi Quantum Contact']);
     })->name('contact');
 
     Route::get('/profile', function () {
@@ -88,9 +142,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('misi', [VisiMisiController::class, 'misi'])->name('misi.index');
     Route::get('misi/create', [VisiMisiController::class, 'create_misi'])->name('misi.create_misi');
     Route::post('misi', [VisiMisiController::class, 'store_misi'])->name('misi.store_misi');
-    Route::get('misi/{visi}/edit', [VisiMisiController::class, 'edit_misi'])->name('misi.edit_misi');
-    Route::put('misi/{visi}', [VisiMisiController::class, 'update_misi'])->name('misi.update_misi');
-    Route::delete('misi/{visi}', [VisiMisiController::class, 'destroy_misi'])->name('misi.destroy_misi');
+    Route::get('misi/{misi}/edit', [VisiMisiController::class, 'edit_misi'])->name('misi.edit_misi');
+    Route::put('misi/{misi}', [VisiMisiController::class, 'update_misi'])->name('misi.update_misi');
+    Route::delete('misi/{misi}', [VisiMisiController::class, 'destroy_misi'])->name('misi.destroy_misi');
 
 
     // teams
@@ -101,8 +155,17 @@ Route::middleware(['auth'])->group(function () {
     Route::put('teams/{team}', [TeamsController::class, 'update'])->name('pages.teams.update');
     Route::delete('teams/{team}', [TeamsController::class, 'destroy'])->name('teams.destroy');
 
+    // FAQ
+    Route::get('faq', [FaqController::class, 'index'])->name('faq.index');
+    Route::get('faq/create', [FaqController::class, 'create'])->name('faq.create');
+    Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
+    Route::get('faq/{faq}/edit', [FaqController::class, 'edit'])->name('faq.edit');
+    Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
+    Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
+
     //contact
     Route::get('/contact', [ContactController::class, 'index']);
+    Route::post('contact/mark-all-read', [ContactController::class, 'markAllRead'])->name('contact.markAllRead');
     Route::delete('contact/{contact}', [ContactController::class, 'destroy'])->name('contact.destroy');
 
 
@@ -116,7 +179,7 @@ Route::middleware(['auth'])->group(function () {
 
 // authentication pages
 Route::get('/signin', [UserController::class, 'signin'])->name('signin');
-Route::post('/signin', [UserController::class, 'postsignin'])->name('postsignin');
+Route::post('/signin', [UserController::class, 'postsignin'])->middleware('throttle:5,1')->name('postsignin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 

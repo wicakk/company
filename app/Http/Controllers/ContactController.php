@@ -52,6 +52,13 @@ class ContactController extends Controller
         return back()->with('success', 'Message sent successfully!');
     }
 
+    // Tandai semua contact sebagai sudah dibaca
+    public function markAllRead()
+    {
+        Contact::where('is_read', false)->update(['is_read' => true]);
+        return back()->with('success', 'Semua notifikasi telah dibaca');
+    }
+
     // Hapus pesan (opsional)
     public function destroy(Contact $contact)
     {

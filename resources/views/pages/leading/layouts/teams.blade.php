@@ -16,7 +16,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" style="margin: 40px">
 
                 @foreach ($teams as $team)
-                    <div style="background-color: {{ $loop->index % 2 === 0 ? '#E0E7FF' : '#FEF3C7' }}; border-radius: 20px; overflow: hidden;">
+                    <div style="background-color: {{ $loop->index % 2 === 0 ? '#E0E7FF' : '#FEF3C7' }}; border-radius: 50px 0 50px 0; overflow: hidden;">
                         <div style="display: flex; align-items: flex-end; justify-content: center; height: 260px; padding: 2rem 1rem 0;">
                             <img src="{{ $team->photo
                                 ? asset('storage/' . $team->photo)

@@ -30,6 +30,10 @@
 
     // final classes (merge user className too)
     $classes = trim("{$base} {$sizeClass} {$variantClass} {$className} {$disabledClass}");
+
+    $allowedTags = '<svg><path><circle><rect><line><polyline><polygon><g><defs><clipPath><use><ellipse><stop><linearGradient><radialGradient>';
+    $safeStartIcon = $startIcon ? strip_tags($startIcon, $allowedTags) : null;
+    $safeEndIcon = $endIcon ? strip_tags($endIcon, $allowedTags) : null;
 @endphp
 
 <button
@@ -43,8 +47,8 @@
         <span class="flex items-center">
             @yield('startIcon')
         </span>
-    @elseif($startIcon)
-        <span class="flex items-center">{!! $startIcon !!}</span>
+    @elseif($safeStartIcon)
+        <span class="flex items-center">{!! $safeStartIcon !!}</span>
     @endif
 
     {{-- main slot --}}
@@ -55,7 +59,7 @@
         <span class="flex items-center">
             @yield('endIcon')
         </span>
-    @elseif($endIcon)
-        <span class="flex items-center">{!! $endIcon !!}</span>
+    @elseif($safeEndIcon)
+        <span class="flex items-center">{!! $safeEndIcon !!}</span>
     @endif
 </button>

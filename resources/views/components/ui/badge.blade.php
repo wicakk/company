@@ -38,16 +38,20 @@
 
     $sizeClass = $sizeStyles[$size] ?? $sizeStyles['md'];
     $colorStyles = $variants[$variant][$color] ?? $variants['light']['primary'];
+
+    $allowedTags = '<svg><path><circle><rect><line><polyline><polygon><g><defs><clipPath><use><ellipse><stop><linearGradient><radialGradient>';
+    $safeStartIcon = $startIcon ? strip_tags($startIcon, $allowedTags) : null;
+    $safeEndIcon = $endIcon ? strip_tags($endIcon, $allowedTags) : null;
 @endphp
 
 <span class="{{ $baseStyles }} {{ $sizeClass }} {{ $colorStyles }}" {{ $attributes }}>
-    @if($startIcon)
-        {!! $startIcon !!}
+    @if($safeStartIcon)
+        {!! $safeStartIcon !!}
     @endif
 
     {{ $slot }}
 
-    @if($endIcon)
-        {!! $endIcon !!}
+    @if($safeEndIcon)
+        {!! $safeEndIcon !!}
     @endif
 </span>

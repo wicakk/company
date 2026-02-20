@@ -19,7 +19,7 @@
         <div class="grid md:grid-cols-3 grid-cols-1 mt-4 gap-6">
             @foreach ($misis as $misi)
                 <div>
-                    {{-- <img src="{{ asset('storage/public/' . $misi->foto) }}" class="h-96 w-full object-cover" /> --}}
+                    <img src="{{ asset('storage/' . $misi->foto) }}" class="h-96 w-full object-cover rounded-t-lg" />
                     <div class="flex flex-col max-w-lg p-6 mx-auto text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <label class="mt-5 font-bold" for="misi">misi</label>
                         <p class="text-xl font-light">{{ $misi->title }}</p>

@@ -58,11 +58,24 @@
                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-input-label for="description" :value="__('description')" />
-                        <x-text-area id="description" class="block mt-1 w-full" type="text"
-                            name="description">{{ old('description') }}</x-text-area>
+                    <div class="mt-4" x-data="{ items: {{ json_encode(old('description', [''])) }} }">
+                        <x-input-label for="description" :value="__('Description Items')" />
+                        <template x-for="(item, index) in items" :key="index">
+                            <div class="flex items-center gap-2 mt-2">
+                                <x-text-input class="block w-full" type="text" name="description[]"
+                                    x-model="items[index]" placeholder="Description item" />
+                                <button type="button" @click="items.splice(index, 1)" x-show="items.length > 1"
+                                    class="px-2 py-1 text-red-600 hover:text-red-800 font-bold text-lg">
+                                    &times;
+                                </button>
+                            </div>
+                        </template>
+                        <button type="button" @click="items.push('')"
+                            class="mt-2 px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
+                            + Add Item
+                        </button>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('description.*')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">

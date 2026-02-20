@@ -50,6 +50,7 @@ class MenuHelper
                     ['name' => 'Services', 'path' => '/service', 'pro' => false],
                     ['name' => 'Visi', 'path' => '/visi', 'pro' => false],
                     ['name' => 'Misi', 'path' => '/misi', 'pro' => false],
+                    ['name' => 'FAQ', 'path' => '/faq', 'pro' => false],
                 ],
             ],
             [

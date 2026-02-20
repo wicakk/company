@@ -26,11 +26,12 @@ class ServiceController extends Controller
         ]);
 
         $request->validate([
-            'nama'           => 'required|string',
-            'subnama'        => 'required|string',
+            'nama'           => 'required|string|max:255',
+            'subnama'        => 'required|string|max:500',
             'price'          => 'required|numeric',
-            'description'    => 'required|string',
-            'billing_period' => 'required|string',
+            'description'    => 'required|array|max:20',
+            'description.*'  => 'required|string|max:500',
+            'billing_period' => 'required|string|max:100',
             'foto'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
@@ -41,7 +42,7 @@ class ServiceController extends Controller
             'nama' => $request->nama,
             'subnama' => $request->subnama,
             'price' => $request->price,
-            'description' => $request->description,
+            'description' => array_values(array_filter($request->description)),
             'billing_period' => $request->billing_period,
             'foto' => $foto->hashName()
         ]);
@@ -61,13 +62,16 @@ class ServiceController extends Controller
         ]);
 
         $validated = $request->validate([
-            'nama'           => 'required|string',
-            'subnama'        => 'required|string',
+            'nama'           => 'required|string|max:255',
+            'subnama'        => 'required|string|max:500',
             'price'          => 'required|numeric',
-            'description'    => 'required|string',
-            'billing_period' => 'required|string',
+            'description'    => 'required|array|max:20',
+            'description.*'  => 'required|string|max:500',
+            'billing_period' => 'required|string|max:100',
             'foto'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
+
+        $validated['description'] = array_values(array_filter($request->description));
 
         if ($request->hasFile('foto')) {
             // Hapus foto lama

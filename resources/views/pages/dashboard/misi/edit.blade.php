@@ -14,11 +14,11 @@
                 @csrf
                 @method('PUT')
 
-                <div class="w-1/2 hidden">
+                <div class="w-1/2">
                     <img :src="imageUrl" class="rounded-md" />
                 </div>
                 <div class="w-full">
-                    <div class="mt-4 hidden">
+                    <div class="mt-4">
                         <x-input-label for="foto" :value="__('Foto')" />
                         <x-text-input accept="image/*" id="foto" class="block mt-1 w-full border p-2"
                             type="file" name="foto" :value="$misi->foto"

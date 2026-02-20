@@ -25,7 +25,7 @@
                             </p>
                         </div>
                         <div>
-                            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
+                            {{-- <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
                                 <button
                                     class="inline-flex items-center justify-center gap-3 rounded-lg bg-gray-100 px-7 py-3 text-sm font-normal text-gray-700 transition-colors hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -63,7 +63,7 @@
                                 <div class="relative flex justify-center text-sm">
                                     <span class="bg-white p-2 text-gray-400 sm:px-5 sm:py-2 dark:bg-gray-900">Or</span>
                                 </div>
-                            </div>
+                            </div> --}}
                            
                             @if(session()->has('error'))
                                 <x-alert type="error" message="{{ session('error') }}" />
@@ -122,9 +122,9 @@
                                                 Keep me logged in
                                             </label>
                                         </div>
-                                        <a href="/reset-password" class="text-brand-500 hover:text-brand-600 dark:text-brand-400 text-sm">
+                                        {{-- <a href="/reset-password" class="text-brand-500 hover:text-brand-600 dark:text-brand-400 text-sm">
                                             Forgot password?
-                                        </a>
+                                        </a> --}}
                                     </div>
                                     <!-- Button -->
                                     <div>

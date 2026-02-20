@@ -14,10 +14,14 @@ class UserController extends Controller
 
     public function postsignin(Request $request)
     {
+    $request->validate([
+        'email'    => 'required|email|max:255',
+        'password' => 'required|string|max:255',
+    ]);
+
     if (Auth::attempt($request->only('email', 'password'))) {
 
-        // Ganti dengan email admin kamu
-        $adminEmail = 'admin@admin.com';
+        $adminEmail = config('app.admin_email', 'admin@admin.com');
 
         if (Auth::user()->email !== $adminEmail) {
             Auth::logout();

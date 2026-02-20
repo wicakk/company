@@ -46,9 +46,25 @@
             <div>
 
                 <span class="text-sm text-gray-500 dark:text-gray-400">Waktu</span>
-                <h6 class="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-                  {{ now()->format('d M Y H:i:s') }}
-                </h6>
+                <div x-data="{
+                    tanggal: '',
+                    jam: '',
+                    init() {
+                        this.updateWaktu();
+                        setInterval(() => this.updateWaktu(), 1000);
+                    },
+                    updateWaktu() {
+                        const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+                        const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+                        const now = new Date();
+                        const wib = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
+                        this.tanggal = hari[wib.getDay()] + ', ' + wib.getDate() + ' ' + bulan[wib.getMonth()] + ' ' + wib.getFullYear();
+                        this.jam = wib.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                    }
+                }">
+                    <h6 class="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90" x-text="tanggal"></h6>
+                    <p class="text-sm text-gray-500 dark:text-gray-400"><span x-text="jam"></span> WIB</p>
+                </div>
             </div>
         </div>
     </div>

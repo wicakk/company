@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Dashboard' }} | Company Profile</title>
+    <title>{{ $title ?? 'Dashboard' }} | PT Digital Teknologi Quantum</title>
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="/build/assets/app-b8pRS68C.css">
+    <link rel="stylesheet" href="/build/assets/app-CksuuEqD.css">
+    <script type="module" src="/build/assets/app-BFNl8d4l.js"></script>
 
     <!-- Alpine.js -->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
